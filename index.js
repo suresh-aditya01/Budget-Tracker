@@ -1,4 +1,6 @@
 const form =document.querySelector(".add");
+const incomeList=document.querySelector("ul.income-list");
+const expenseList=document.querySelector("ul.expense-list");
 let transactions=localStorage.getItem("transactions")!==null? JSON.parse(localStorage.getItem("transactions")): [];
 function addTransaction(source, amount){
     const time = new Date();
