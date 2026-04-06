@@ -1,15 +1,23 @@
 const form =document.querySelector(".add");
 let transactions=localStorage.getItem("transactions")!==null? JSON.parse(localStorage.getItem("transactions")): [];
+function addTransaction(source, amount){
+    const time = new Date();
+
+    const transaction = {
+        id: Math.floor(Math.random() * 100000),
+        source: source,
+        amount: amount,
+        time: `${time.toLocaleTimeString()} ${time.toLocaleDateString()}`
+    };
+
+    transactions.push(transaction);
+
+    localStorage.setItem("transactions", JSON.stringify(transactions)); 
+}
 form.addEventListener("submit",event=>{
     event.preventDefault();
-    const time=new Date();
-    // console.log(form.source.value,form.amount.value);
-    const transaction ={
-        id:Math.floor(Math.random()*100000),
-        source:form.source.value,
-        amount:form.amount.value,
-        time:`${time.toLocaleTimeString()}${time.toLocaleDateString()}`
-    };
-    transactions.push(transaction)
-    localStorage.setItem("transactions",JSON.stringify(transactions));
+    addTransaction(form.source.value,form.amount.value);
+    form.reset();
+   
 })
+
